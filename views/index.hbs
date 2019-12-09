@@ -1,0 +1,19 @@
+<h1>Loja</h1>
+<h2>Detalhes do produto</h2>
+<a href="http://localhost:3000/">Início</a>
+    {{#each products}}
+    <div class='cont'>                
+        <p><b>Nome</b>: {{this.name}}</p>  
+        <p><b>Preço</b>: ${{this.price}}</p>            
+        <p><a href='http://localhost:3000/products/{{this.id}}' class='bot'>Visualizar</a></p>            
+        <p><a href='#' onclick='remover_prod({{this.id}}); return false;' class='bot_r'>Remover</a></p>                     
+    </div>
+    {{/each}}
+<script>
+function remover_prod(id){
+        var status = confirm("Deseja remover o produto?"+id);
+        if(status){
+          redirect('http://localhost:3000/products/remove_product/'+id)  
+        }
+    }
+</script>

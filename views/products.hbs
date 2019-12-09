@@ -1,0 +1,41 @@
+<h1>Store</h1>
+<a href="http://localhost:3000/">Início</a>
+<h2>Detalhes do produto</h2>
+<div class='cont'>
+    {{#each products}}    
+    <p><b>Nome</b>: {{this.name}}</p>
+    <p><b>Preço</b>: ${{this.price}}</p>
+    <p><b>Descrição</b>: {{this.description}}</p>
+    <p><a href='http://localhost:3000/products/alterar/{{this.id}}' class='bot'>Alterar Produto</a></p>                
+</div>
+<div class='form-comment'>    
+    <form action="http://localhost:3000/comentario/new_comment/{{this.id}}" method="POST" role="form">
+        <h2>Adicionar comentário</h2>
+            <p><label for="">Autor</label>
+            <input type="text" class="form-control" id="" name='author' placeholder="comentário"></p>
+            <input type="hidden" name='prod' value="{{this.id}}">
+            <p><label for="">Comentário</label>
+            <input type="text" class="form-control" id="" name='comment'placeholder="comentário">
+            </p>
+            <p><button type="submit" class="btn btn-primary">Salvar</button></p>
+    </form>
+    
+</div>
+<h2>Lista de comentários</h2>
+<div class='comentario'></div>
+<script>
+    
+    $(document).ready(function(){       
+         $.ajax({
+              type: "get",
+              url: "http://localhost:3000/comentario/{{this.id}}",              
+              dataType: "Json",
+              success: function (r) {
+                  for(var i =0; i < r.length; i++){
+                      $(".comentario").append("<div class='exibe'> <strong>Nome: </strong> "+r[i].author+" <br><strong> Comentário: </strong>"+r[i].comment+"</div>");
+                  }
+              }
+          });
+    });
+</script>
+{{/each}}   

@@ -1,0 +1,19 @@
+<h1>Loja: Alteração de produto</h1>
+<a href="http://localhost:3000/">Início</a>
+<div class='form-comment'>
+<h2>Alterar produto</h2>
+<form action='http://localhost:3000/products/alterar_produto' method='post'>
+    <ul>
+        {{#each products}}
+            <li>
+                <input type='hidden' name='id' value='{{this.id}}'>
+                <p><b>Name <input type='text' name='name' value='{{this.name}}'></b>
+                <p><b>Price <input type='text' name='price' value='{{this.price}}'></b>
+                <p><b>description <input type='text' name='description' value='{{this.description}}'></b>                        
+            </li>
+
+        {{/each}}
+    </ul>
+    <button type="submit">Salvar</button>
+</form>
+</div>
